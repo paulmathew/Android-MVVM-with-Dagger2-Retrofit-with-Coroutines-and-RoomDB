@@ -7,16 +7,20 @@ import androidx.lifecycle.viewModelScope
 import com.otherTallguy.dagger2example.model.Country
 import com.otherTallguy.dagger2example.repository.CountryRepository
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * viewModel needs  repository class object to access the data from the model.
  * so we are passing that in the constructor itself
  */
 
-class MainViewModel(private val repository: CountryRepository ) :ViewModel() {
+class MainViewModel @Inject constructor(
+    private val repository: CountryRepository,
+    private val testForMultiBinding: TestForMultiBinding
+) : ViewModel() {
 
-    val countriesLiveData:LiveData<List<Country>>
-        get() =repository.countries
+    val countriesLiveData: LiveData<List<Country>>
+        get() = repository.countries
 
     val countryLoadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
@@ -41,4 +45,11 @@ class MainViewModel(private val repository: CountryRepository ) :ViewModel() {
         }
     }
 
+}
+
+
+class TestForMultiBinding @Inject constructor() {
+    fun testSomething() {
+
+    }
 }

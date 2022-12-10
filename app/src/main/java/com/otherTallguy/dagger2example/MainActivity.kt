@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var countryList: ArrayList<Country>
     private lateinit var countriesAdapter: CountryListAdapter
 
-    
+
 
     @Inject
     lateinit var mainViewModelFactory: MainViewModelFactory // Dagger will provide the object to this variable through field injection
@@ -30,6 +30,9 @@ class MainActivity : AppCompatActivity() {
         (application as CountriesApplication).applicationComponent.inject(this)
         // what the above code do is, It will check the file for any of the @Inject property and if there are any
         // it will inject the correct object to them. Here it is mainViewModelFactory
+
+
+
 
         mainViewModel = ViewModelProvider(this, mainViewModelFactory)[MainViewModel::class.java]
 
